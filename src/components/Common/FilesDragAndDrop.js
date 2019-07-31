@@ -47,7 +47,6 @@ export default class FilesDragAndDrop extends React.Component {
         e.stopPropagation();
 
         this.setState({dragging: false});
-        this.dragCounter = 0;
 
         const {count, formats} = this.props;
 
@@ -73,8 +72,7 @@ export default class FilesDragAndDrop extends React.Component {
         e.preventDefault();
         e.stopPropagation();
 
-        this.dragCounter++;
-        if (this.dragCounter === 1) {
+        if (e.target !== this.drag) {
             this.setState({dragging: true});
         }
     };
@@ -83,8 +81,7 @@ export default class FilesDragAndDrop extends React.Component {
         e.preventDefault();
         e.stopPropagation();
 
-        this.dragCounter--;
-        if (this.dragCounter === 0) {
+        if (e.target === this.drag) {
             this.setState({dragging: false});
         }
     };
@@ -109,6 +106,10 @@ export default class FilesDragAndDrop extends React.Component {
 
     initDrop = (drop) => {
         this.drop = drop;
+    };
+
+    initDrag = (drag) => {
+        this.drag = drag;
     };
 
     render() {
@@ -138,7 +139,10 @@ export default class FilesDragAndDrop extends React.Component {
                     </div>
                 )}
                 {dragging && (
-                    <div className={classList['FilesDragAndDrop__placeholder']}>
+                    <div
+                        ref={this.initDrag}
+                        className={classList['FilesDragAndDrop__placeholder']}
+                    >
                         Drop that file down low
                         <span
                             role='img'
