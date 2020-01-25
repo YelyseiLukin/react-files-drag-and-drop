@@ -1,19 +1,21 @@
 {
-  "name": "project",
+  "name": "react-files-dnd",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack",
-    "build:prod": "npx cross-env NODE_ENV=production ENV=prod npm run build"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://dkochetov@bitbucket.org/dkochetov/bwf-frontend.git"
+    "url": "git@github.com:YelyseiLukin/files-drag-and-drop.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Yelysei Lukin",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
