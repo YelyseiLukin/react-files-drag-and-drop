@@ -24,8 +24,7 @@ First you need to import FilesDragAndDrop component:
 import FilesDragAndDrop from '@yelysei/react-files-dnd';
 ```
 
-Then create a container for a drag and drop area. The component will cover its entire area.
-You can provide the custom content as well. 
+And then use it like this: 
 
 ```javascript
 <FilesDragAndDrop
@@ -36,6 +35,7 @@ You can provide the custom content as well.
         containerStyles={
             width: '200px',
             height: '200px',
+            border: '1px solid #cccccc',
         },
     }
 >
