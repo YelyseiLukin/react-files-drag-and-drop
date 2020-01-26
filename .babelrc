@@ -12,15 +12,7 @@
     ],
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-export-default-from",
-    "@babel/plugin-proposal-optional-chaining"
-  ],
-  "env": {
-    "development": {
-      "plugins": [
-        "@babel/plugin-transform-react-jsx-source"
-      ]
-    },
-    "production": {
-    }
-  }
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-transform-react-jsx-source"
+  ]
 }

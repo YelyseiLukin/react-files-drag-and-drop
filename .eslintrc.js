@@ -4,10 +4,6 @@ module.exports = {
     env: {
         'browser': true,
     },
-    globals: {
-        '$': 'readonly',
-        'jQuery': 'readonly',
-    },
     rules: {
         'jsx-quotes': ['error', 'prefer-single'],
         'object-curly-spacing': ['error', 'never'],

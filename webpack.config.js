@@ -8,7 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-const srcPath = path.join(__dirname, 'src');
+const srcPath = path.join(__dirname, '');
 const distPath = path.join(__dirname, 'dist');
 
 module.exports = function () {
