@@ -28,21 +28,25 @@ Then create a container for a drag and drop area. The component will cover its e
 You can provide the custom content as well. 
 
 ```javascript
-<div style={{
-    width: '200px',
-    height: '200px',
-    border: '1px solid #cccccc',
-}}>
-    <FilesDragAndDrop>
-        <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        }}>
-            Drop files here
-        </div>
-    </FilesDragAndDrop>
-</div>
+<FilesDragAndDrop
+    onUpload={(files) => console.log(files)}
+    count={10}
+    formats={['jpg', 'png', 'svg']}
+    styles={
+        containerStyles={
+            width: '200px',
+            height: '200px',
+        },
+    }
+>
+    <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }}>
+        Drop files here
+    </div>
+</FilesDragAndDrop>
 ```
 
 ## Props
