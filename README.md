@@ -31,13 +31,13 @@ And then use it like this:
     onUpload={(files) => console.log(files)}
     count={10}
     formats={['jpg', 'png', 'svg']}
-    styles={
-        containerStyles={
+    styles={{
+        containerStyles: {
             width: '200px',
             height: '200px',
             border: '1px solid #cccccc',
         },
-    }
+    }}
 >
     <div style={{
         display: 'flex',
