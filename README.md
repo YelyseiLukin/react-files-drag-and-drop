@@ -2,7 +2,7 @@
 
 A simple and customizable React Component that handles files Drag & Drop.
 
-## Instalation
+## Installation
 
 Install with npm:
 
