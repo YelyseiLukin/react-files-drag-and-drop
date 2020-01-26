@@ -9,9 +9,22 @@ export default function FilesDragAndDrop({
   onUpload,
   count,
   formats,
-  texts,
-  styles,
-  messagesDuration,
+  texts: {
+    hoverText = 'Drop files here',
+    successText = 'Successfully uploaded',
+    errorCountText = ({count}) => `Only ${count} file${count !== 1 ? 's' : ''} can be uploaded at a time`,
+    errorFormatText = ({formats}) => `Only following file formats are acceptable: ${formats.join(', ')}`,
+  },
+  styles: {
+    containerStyles = {},
+    hoverMessageStyles = {},
+    successMessageStyles = {},
+    errorMessageStyles = {},
+  },
+  messagesDuration: {
+    successTime = 1000,
+    errorTime = 2000,
+  },
 }) {
   const [dragging, setDragging] = React.useState(false);
   const [message, setMessage] = React.useState({
@@ -51,39 +64,30 @@ export default function FilesDragAndDrop({
     const files = [...e.dataTransfer.files];
 
     if (count && count < files.length) {
-      const messageErrorCount = texts?.errorCount
-        && (typeof texts?.errorCount === 'function' ? texts?.errorCount({count}) : texts?.errorCount);
-
       showMessage(
-        messageErrorCount || `Only ${count} file${count !== 1 ? 's' : ''} can be uploaded at a time`,
+        typeof errorCountText === 'function' ? errorCountText({count}) : errorCountText,
         'error',
-        messagesDuration?.error || 2000,
+        errorTime,
       );
 
       return;
     }
 
     if (formats && files.some((file) => !formats.some((format) => file.name.toLowerCase().endsWith(format.toLowerCase())))) {
-      const messageErrorFormat = texts?.errorFormat
-        && (typeof texts?.errorFormat === 'function' ? texts?.errorFormat({formats}) : texts?.errorFormat);
-
       showMessage(
-        messageErrorFormat || `Only following file formats are acceptable: ${formats.join(', ')}`,
+        typeof errorFormatText === 'function' ? errorFormatText({formats}) : errorFormatText,
         'error',
-        messagesDuration?.error || 2000,
+        errorTime,
       );
 
       return;
     }
 
     if (files && files.length) {
-      const messageSuccess = texts?.success
-        && (typeof texts?.success === 'function' ? texts?.success({files}) : texts?.success);
-
       showMessage(
-        messageSuccess || 'Successfully uploaded',
+        typeof successText === 'function' ? successText({formats}) : successText,
         'success',
-        messagesDuration?.success || 1000,
+        successTime,
       );
 
       onUpload(files);
@@ -122,13 +126,11 @@ export default function FilesDragAndDrop({
     }), timeout);
   };
 
-  const messageHover = texts?.hover
-    && (typeof texts?.hover === 'function' ? texts?.hover({formats, count}) : texts?.hover);
-
   return (
     <div
       ref={drop}
       className={classList['FilesDragAndDrop']}
+      style={{...containerStyles}}
     >
       {message.show && (
         <div
@@ -137,9 +139,9 @@ export default function FilesDragAndDrop({
             classList[`FilesDragAndDrop__placeholder--${message.type}`],
           )}
           style={{
-            ...(styles?.placeholder || {}),
-            ...(message.type === 'success' && (styles?.placeholderSuccess || {})),
-            ...(message.type === 'error' && (styles?.placeholderError || {})),
+            ...hoverMessageStyles,
+            ...(message.type === 'success' && successMessageStyles),
+            ...(message.type === 'error' && errorMessageStyles),
           }}
         >
           {message.text}
@@ -149,11 +151,9 @@ export default function FilesDragAndDrop({
         <div
           ref={drag}
           className={classList['FilesDragAndDrop__placeholder']}
-          style={{
-            ...(styles?.placeholder || {}),
-          }}
+          style={{...hoverMessageStyles}}
         >
-          {messageHover || 'Drop files here'}
+          {typeof hoverText === 'function' ? hoverText({formats, count}) : hoverText}
         </div>
       )}
       {children}
@@ -167,18 +167,19 @@ FilesDragAndDrop.propTypes = {
   count: PropTypes.number,
   formats: PropTypes.arrayOf(PropTypes.string),
   texts: PropTypes.shape({
-    hover: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    success: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    errorCount: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    errorFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    hoverText: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    successText: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    errorCountText: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    errorFormatText: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   }),
   styles: PropTypes.shape({
-    placeholder: PropTypes.shape({}),
-    placeholderSuccess: PropTypes.shape({}),
-    placeholderError: PropTypes.shape({}),
+    containerStyles: PropTypes.shape({}),
+    hoverMessageStyles: PropTypes.shape({}),
+    successMessageStyles: PropTypes.shape({}),
+    errorMessageStyles: PropTypes.shape({}),
   }),
   messagesDuration: PropTypes.shape({
-    success: PropTypes.number,
-    error: PropTypes.number,
+    successTime: PropTypes.number,
+    errorTime: PropTypes.number,
   }),
 };
