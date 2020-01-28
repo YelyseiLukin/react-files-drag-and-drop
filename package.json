@@ -1,11 +1,16 @@
 {
   "name": "@yelysei/react-files-dnd",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "build": "tsc",
     "lint": "tslint -p tsconfig.json",
-    "test": "jest --config jestconfig.json"
+    "test": "jest --config jestconfig.json",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "git add -A src",
+    "postversion" : "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -28,8 +33,10 @@
     "dnd",
     "drag",
     "drop",
+    "html",
     "file",
     "file field",
+    "file input",
     "draggable",
     "droppable",
     "droparea",
