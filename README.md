@@ -52,12 +52,23 @@ And then use it like this:
 
 Here is the list of all available props:
 
-Name | Type | Description
----|---|---
-`onUpload` | function | Function that will be called when files are dropped into the component and successfully validated. Receives list of `files`
-`children` | node | Inner content of the component
-`count` | number | Max count of files
-`formats` | string[] | List of available file formats
-`texts` | {<br/>&nbsp;&nbsp;hoverText: string or function,<br/>&nbsp;&nbsp;successText: string or function,<br/>&nbsp;&nbsp;errorCountText: string or function,<br/>&nbsp;&nbsp;errorFormatText: string or function,<br/>} | - hoverText - message that will appear when files are dragged over the component. Function receives available file formats and max files count. Default value: 'Drop files here'<br/>- successText - message that will appear when files are successfully uploaded. Function receives list of uploaded files. Default value: 'Successfully uploaded'<br/>- errorCountText - message that will appear when more files than available are dropped into the component. Function receives available max files count. Default value: ({count}) => \`Only ${count} file${count !== 1 ? 's' : ''} can be uploaded at a time\`<br/>- errorFormatText - message that will appear when files with incorrect formats are dropped into the component. Function receives available file formats. Default value: ({formats}) => \`Only following file formats are acceptable: ${formats.join(', ')}\` 
-`styles` | {<br/>&nbsp;&nbsp;containerStyles: object,<br/>&nbsp;&nbsp;hoverMessageStyles: object,<br/>&nbsp;&nbsp;successMessageStyles: object,<br/>&nbsp;&nbsp;errorMessageStyles: object,<br/>} | - containerStyles - custom styles for container<br/>- hoverMessageStyles - custom styles for hover message<br/>- successMessageStyles - custom styles for success message<br/>- errorMessageStyles - custom styles for error message
-`messagesDuration` | {<br/>&nbsp;&nbsp;successTime: number,<br/>&nbsp;&nbsp;errorTime: number,<br/>} | - successTime - time duration in milliseconds when the success message will be displayed. Default value: 1000<br/>- errorTime - time duration in milliseconds when the error message will be displayed. Default value: 2000
+Name | Type | Required | Description
+---|---|---|---
+`onUpload` | function | + | Function that will be called when files are dropped into the component and successfully validated. Receives list of `files`
+`children` | node | + | Inner content of the component
+`count` | number | | Max count of files
+`formats` | string[] | | List of available file formats
+`openDialogOnClick` | boolean | | If enabled, file dialog will be opened on click at the component
+`hoverText` | string or function | | Message that will appear when files are dragged over the component. Function receives available file formats and max files count.<br/>Default value: 'Drop files here'
+`successText` | string or function | | Message that will appear when files are successfully uploaded. Function receives list of uploaded files.<br/>Default value: 'Successfully uploaded'
+`errorCountText` | string or function | | Message that will appear when more files than available are dropped into the component. Function receives available max files count.<br/>Default value: ({count}) => \`Only ${count} file${count !== 1 ? 's' : ''} can be uploaded at a time\`
+`errorFormatText` | string or function | | Message that will appear when files with incorrect formats are dropped into the component. Function receives available file formats.<br/>Default value: ({formats}) => \`Only following file formats are acceptable: ${formats.join(', ')}\` 
+`containerStyles` | CSS properties | | Custom styles for container
+`hoverMessageStyles` | CSS properties | | Custom styles for hover message
+`successMessageStyles` | CSS properties | | Custom styles for success message
+`errorMessageStyles` | CSS properties | | Custom styles for error message
+`successTime` | number | | Time duration in milliseconds when the success message will be displayed.<br/>Default value: 1000
+`errorTime` | number | | Time duration in milliseconds when the error message will be displayed.<br/>Default value: 2000
+`onDrop` | function | | Function that will be called when files are dropped into the component but not validated yet. Receives list of `files`
+`onDragEnter` | function | | Function that will be called when dragged files entered the component
+`onDragLeave` | function | | Function that will be called when dragged files leaved the component
