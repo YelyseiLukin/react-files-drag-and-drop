@@ -5,6 +5,7 @@ interface FilesDragAndDropProps {
   children: React.ReactElement | React.ReactElement[];
   count?: number;
   formats?: string[];
+  openDialogOnClick?: boolean;
   hoverText?: (({count, formats}: {count?: number, formats?: string[]}) => string) | string;
   successText?: (({files}: {files: File[]}) => string) | string;
   errorCountText?: (({count}: {count?: number}) => string) | string;
@@ -15,13 +16,17 @@ interface FilesDragAndDropProps {
   errorMessageStyles?: React.CSSProperties;
   successTime?: number;
   errorTime?: number;
+  onDragEnter?: () => void;
+  onDragLeave?: () => void;
+  onDrop?: (files: File[]) => void;
 }
 
-export default function FilesDragAfigndDrop({
+export default function FilesDragAndDrop({
   onUpload,
   children,
   count,
   formats,
+  openDialogOnClick = false,
   hoverText = 'Drop files here',
   successText = 'Successfully uploaded',
   errorCountText = ({count}) => `Only ${count} file${count !== 1 ? 's' : ''} can be uploaded at a time`,
@@ -32,6 +37,9 @@ export default function FilesDragAfigndDrop({
   errorMessageStyles = {},
   successTime = 1000,
   errorTime = 2000,
+  onDragEnter,
+  onDragLeave,
+  onDrop,
 }: FilesDragAndDropProps): React.ReactElement {
   const [dragging, setDragging] = React.useState(false);
   interface MessageProps {
@@ -47,6 +55,7 @@ export default function FilesDragAfigndDrop({
 
   const drag = React.useRef(null);
   const drop = React.useRef(null);
+  const input = React.useRef(null);
 
   React.useEffect(() => {
     // @ts-ignore
@@ -83,6 +92,40 @@ export default function FilesDragAfigndDrop({
 
     const files = e.dataTransfer ? [...e.dataTransfer.files] : [];
 
+    onDrop && onDrop(files);
+
+    handleUpload(files);
+  };
+
+  const handleDragEnter = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.target !== drag.current) {
+      setDragging(true);
+
+      onDragEnter && onDragEnter();
+    }
+  };
+
+  const handleDragLeave = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.target === drag.current) {
+      setDragging(false);
+
+      onDragLeave && onDragLeave();
+    }
+  };
+
+  const handleSelectFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = [...e.target.files];
+
+    handleUpload(files);
+  };
+
+  const handleUpload = (files: File[]) => {
     if (count && count < files.length) {
       showMessage(
         typeof errorCountText === 'function' ? errorCountText({count}) : errorCountText,
@@ -116,24 +159,6 @@ export default function FilesDragAfigndDrop({
     }
   };
 
-  const handleDragEnter = (e: DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.target !== drag.current) {
-      setDragging(true);
-    }
-  };
-
-  const handleDragLeave = (e: DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.target === drag.current) {
-      setDragging(false);
-    }
-  };
-
   const showMessage = (text: string, type: string, timeout: number) => {
     setMessage({
       show: true,
@@ -148,14 +173,31 @@ export default function FilesDragAfigndDrop({
     }), timeout);
   };
 
+  const openFileDialog = () => {
+    // @ts-ignore
+    input && input.current.click();
+  };
+
   return (
     <div
       ref={drop}
       style={{
         ...styles.container,
+        cursor: openDialogOnClick ? 'pointer' : 'default',
         ...containerStyles,
       }}
+      onClick={openDialogOnClick ? openFileDialog : undefined}
     >
+      {openDialogOnClick && (
+        <input
+          ref={input}
+          type='file'
+          style={{...styles.input}}
+          accept={formats ? formats.map((format) => `.${format}`).join(', ') : undefined}
+          multiple={!count || count > 1}
+          onChange={handleSelectFiles}
+        />
+      )}
       {message.show && (
         <div
           style={{
@@ -188,6 +230,7 @@ export default function FilesDragAfigndDrop({
 
 const styles: {
   container: React.CSSProperties,
+  input: React.CSSProperties,
   message: React.CSSProperties,
   messageSuccess: React.CSSProperties,
   messageError: React.CSSProperties,
@@ -196,6 +239,15 @@ const styles: {
     position: 'relative',
     width: '100%',
     height: '100%',
+  },
+  input: {
+    position: 'absolute',
+    left: '0',
+    top: '0',
+    width: '1px',
+    height: '1px',
+    opacity: '0',
+    cursor: 'default',
   },
   message: {
     position: 'absolute',
