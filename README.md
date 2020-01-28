@@ -1,6 +1,6 @@
 # @yelysei/react-files-dnd
 
-A simple and customizable React Component that handles Files Drag & Drop.
+A light-weighted and customizable React Component that handles Files Drag & Drop.
 
 ## Installation
 
@@ -29,15 +29,14 @@ And then use it like this:
 ```javascript
 <FilesDragAndDrop
     onUpload={(files) => console.log(files)}
-    count={10}
+    count={3}
     formats={['jpg', 'png', 'svg']}
-    styles={{
-        containerStyles: {
-            width: '200px',
-            height: '200px',
-            border: '1px solid #cccccc',
-        },
+    containerStyles={{
+        width: '200px',
+        height: '200px',
+        border: '1px solid #cccccc',
     }}
+    openDialogOnClick
 >
     <div style={{
         display: 'flex',
