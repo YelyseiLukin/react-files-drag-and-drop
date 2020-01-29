@@ -1,6 +1,6 @@
 {
   "name": "@yelysei/react-files-dnd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "build": "tsc",
@@ -26,21 +26,10 @@
   },
   "keywords": [
     "react",
-    "reactjs",
-    "react-component",
     "javascript",
-    "drag-and-drop",
+    "drag and drop",
     "dnd",
-    "drag",
-    "drop",
-    "html",
-    "file",
-    "file field",
-    "file input",
-    "draggable",
-    "droppable",
-    "droparea",
-    "dropzone"
+    "file input"
   ],
   "homepage": "https://github.com/YelyseiLukin/react-files-dnd#readme",
   "author": "Yelysei Lukin <ylukin277@gmail.com>",
