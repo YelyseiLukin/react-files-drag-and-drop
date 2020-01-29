@@ -1,6 +1,6 @@
 {
   "name": "@yelysei/react-files-dnd",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A light-weighted and customizable React Component that handles Files Drag & Drop.",
   "keywords": [
     "react",
