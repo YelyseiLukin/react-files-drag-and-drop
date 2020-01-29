@@ -1,7 +1,18 @@
 {
   "name": "@yelysei/react-files-dnd",
   "version": "1.0.2",
-  "description": "",
+  "description": "A light-weighted and customizable React Component that handles Files Drag & Drop.",
+  "keywords": [
+    "react",
+    "react component",
+    "javascript",
+    "drag and drop",
+    "dnd",
+    "file input",
+    "droparea",
+    "dropzone",
+    "upload"
+  ],
   "scripts": {
     "build": "tsc",
     "lint": "tslint -p tsconfig.json",
@@ -24,13 +35,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "react",
-    "javascript",
-    "drag and drop",
-    "dnd",
-    "file input"
-  ],
   "homepage": "https://github.com/YelyseiLukin/react-files-dnd#readme",
   "author": "Yelysei Lukin <ylukin277@gmail.com>",
   "license": "MIT",
