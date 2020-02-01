@@ -1,7 +1,7 @@
 {
-  "name": "@yelysei/react-files-dnd",
-  "version": "1.0.3",
-  "description": "A light-weighted and customizable React Component that handles Files Drag & Drop.",
+  "name": "@yelysei/react-files-drag-and-drop",
+  "version": "1.0.0",
+  "description": "A light-weighted and customizable React Component that handles Files Drag & Drop",
   "keywords": [
     "react",
     "react component",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:YelyseiLukin/files-drag-and-drop.git"
+    "url": "git@github.com:YelyseiLukin/react-files-drag-and-drop.git"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -35,7 +35,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/YelyseiLukin/react-files-dnd#readme",
+  "homepage": "https://github.com/YelyseiLukin/react-files-drag-and-drop#readme",
   "author": "Yelysei Lukin <ylukin277@gmail.com>",
   "license": "MIT",
   "dependencies": {

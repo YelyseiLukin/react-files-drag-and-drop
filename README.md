@@ -1,4 +1,4 @@
-# @yelysei/react-files-dnd
+# @yelysei/react-files-drag-and-drop
 
 A light-weighted and customizable React Component that handles Files Drag & Drop.
 
@@ -7,13 +7,13 @@ A light-weighted and customizable React Component that handles Files Drag & Drop
 Install with npm:
 
 ```
-npm i @yelysei/react-files-dnd
+npm i @yelysei/react-files-drag-and-drop
 ```
 
 or with yarn:
 
 ```
-yarn add @yelysei/react-files-dnd
+yarn add @yelysei/react-files-drag-and-drop
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ yarn add @yelysei/react-files-dnd
 First you need to import FilesDragAndDrop component:
 
 ```javascript
-import FilesDragAndDrop from '@yelysei/react-files-dnd';
+import FilesDragAndDrop from '@yelysei/react-files-drag-and-drop';
 ```
 
 And then use it like this: 
